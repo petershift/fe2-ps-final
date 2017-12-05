@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../../../models/Recipe';
+import { Recipe } from '../../models/Recipe';
 import { DataService } from '../../service/data.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -24,8 +24,8 @@ export class RecipeDetailComponent implements OnInit {
 
   async ngOnInit() {
     const response = await this.dataService.getRecipe(this.id)
-    this.recipe = response.json()
-    this.imageUrl = 'http://localhost:4200/assets/home/'
+    // this.recipe = response.json()
+    .then(response => this.recipe = response.json())
   }
 
 }
