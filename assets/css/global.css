@@ -1,0 +1,33 @@
+:root {
+  --blue: #007eb6;
+  --green: #3f504a;;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+
+html {
+  box-sizing: border-box;
+  font-family: 'helvetica neue';
+  font-size: 20px;
+  font-weight: 200;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--blue);
+}
+
+.wrap {
+  background: #eee;
+  max-width: 90%;
+  padding: 0.5rem;
+  margin: 1rem auto;
+}
+.wrap h1, 
+.wrap h2 {
+  font-family: lobster;
+  margin-top: 0;
+}

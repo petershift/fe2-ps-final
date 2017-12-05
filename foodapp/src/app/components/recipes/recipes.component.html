@@ -1,0 +1,13 @@
+<div class="recipes">
+	<h1>{{ pageTitle }}</h1>
+
+	<ul>
+		<li *ngFor="let recipe of recipes">
+			<img src="assets/home/{{ recipe.image }}" />
+			<div>
+				<h2><a href="recipe/{{ recipe._id }}">{{ recipe.title }}</a></h2>
+				<p>{{ recipe.description }}</p>
+			</div>
+		</li>
+	</ul>
+</div>
