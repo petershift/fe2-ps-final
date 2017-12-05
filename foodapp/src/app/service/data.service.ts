@@ -9,17 +9,18 @@ export class DataService {
 
 	recipe: Recipe;
 	recipes: Recipe[];
+	apiUrl: string;
 
 	constructor(private http: Http) {
-
+		this.apiUrl = 'http://localhost:3006/api/'
 	}
 
 	getRecipes(){
-		return this.http.get('http://localhost:3006/api/recipe').toPromise();
+		return this.http.get(`${this.apiUrl}recipe/`).toPromise();
 	}
 
 	getRecipe(id) {
-		return this.http.get('http://localhost:3006/api/recipe/' + id).toPromise()
+		return this.http.get(`${this.apiUrl}recipe/${id}`).toPromise()
 	}
 
 }

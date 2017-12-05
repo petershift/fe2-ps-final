@@ -11,11 +11,11 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 export class RecipeDetailComponent implements OnInit {
 
 	id: string;
+  imageUrl: string;
 	recipe: Recipe;
 
   constructor(public dataService: DataService, public route: ActivatedRoute) {
   	this.id = this.route.snapshot.params['id'];
-  	// this.recipe = dataService.getRecipe(this.id);
   }
 
   back(){
@@ -25,6 +25,7 @@ export class RecipeDetailComponent implements OnInit {
   async ngOnInit() {
     const response = await this.dataService.getRecipe(this.id)
     this.recipe = response.json()
+    this.imageUrl = 'http://localhost:4200/assets/home/'
   }
 
 }

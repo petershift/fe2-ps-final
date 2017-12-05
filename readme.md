@@ -1,14 +1,30 @@
-# Session 9 - Angular
+# Session 10 - Angular
 
 ## Homework
 
-Using the notes from session 7 where we created our API - set the foodapp project to request information from *your* database on mLab.
 
-Remember, to seed your database you can use the `api/import` endpoint.
-
-We will need to do this before we can start sending post / delete / etc. requests.
 
 ## FoodApp
+
+Added apiUrl to data service
+
+Added imageUrl to recipe-detail component
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Create a new angular project
 
