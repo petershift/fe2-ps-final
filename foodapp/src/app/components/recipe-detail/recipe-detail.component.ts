@@ -8,11 +8,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css']
 })
+
 export class RecipeDetailComponent implements OnInit {
 
 	id: string;
   imageUrl: string;
-	recipe: Recipe;
+  recipe: Recipe;
 
   constructor(public dataService: DataService, public route: ActivatedRoute) {
   	this.id = this.route.snapshot.params['id'];
