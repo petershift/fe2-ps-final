@@ -265,7 +265,9 @@ Add Cancel button to the form that sets the formEnables flag to false
 
 Add Edit button to the template that sets the formEnables flag to true
 
+## Adding a Recipe
 
+We will do this from the recipe list page.
 
 
 
