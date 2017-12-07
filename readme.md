@@ -584,6 +584,10 @@ Examine package.json
 
 What appears to be HTML is JSX.
 
+JSX is a templating language that looks similar to HTML but there are a few extra things that it provides. You can embed any javascript inside of a JSX template by wrapping it in curly braces ({}). Some words are special and reserved, such as class, so there are JSX-specific properties/attributes/etc you need to use (such as className).
+
+In addition, React components must only return a SINGLE JSX node at its root, so it’s very common to wrap up your components into a single div.
+
 1. logo: {logo}: JSX
 1. App.css: injected via Webpack:`<style>`
 1. class → className: JSX
@@ -598,7 +602,7 @@ Note - to use Emmet run - `ctrl-e`
 
 Comments:
 
-`{ /* comment */ }` see http://wesbos.com/react-jsx-comments/
+`{ /* comment */ }`
 
 
 ## Additional Installs
@@ -608,9 +612,11 @@ Comments:
 
 Use `JavaScript(Babel)` as your highlighter in Sublime test.
 
-App.js:
+* app.js
 
 `import logo from './anchor.svg';`
+
+Provide the logo.
 
 `<h2>Pirate List</h2>`
 
@@ -627,7 +633,9 @@ App.css:
 
 ### Components
 
-Pirate.js
+Reusable components of your website.
+
+* Pirate.js
 
 ```
 import React, { Component } from 'react';
@@ -643,7 +651,7 @@ class Pirate extends React.Component {
 export default Pirate;
 ```
 
-App.js
+* App.js
 
 ```
 import Pirate from './Pirate';
@@ -659,6 +667,15 @@ Pirate.js
 <p>{this.props.tagline}</p>
 ```
 
+e.g.
+
+```
+<div>
+  <p>Pirate Component</p>
+  <p>{this.props.tagline}</p>
+</div>
+```
+
 Inspect using React tool.
 
 #### React dev tools
@@ -670,6 +687,8 @@ Inspect using React tool.
 Select <Pirate />
 
 `$r.props`
+
+Try on *Instagram* or Facebook - two sites that use React. Find a component that has Object as its prototype.
 
 Exercise - creating another component
 
@@ -690,7 +709,11 @@ class Header extends React.Component {
 export default Header;
 ```
 
+* App.js
+
 `import Header from './Header';`
+
+`<Header />`
 
 ## Adding Pirates
 
@@ -722,11 +745,11 @@ App.js
 import PirateForm from './PirateForm';
 ```
 
-State / Data binding
+## State / Data binding
 
 AddPirateForm.js
 
-```
+```js
 import React, { Component } from 'react';
 
 class AddPirateForm extends React.Component {
@@ -769,7 +792,7 @@ createPirate(event) {
 }
 ```
 
-Test
+Test.
 
 Add refs to the form to store references to the input:
 
@@ -856,11 +879,15 @@ note - bind() - creates a new function that, when called, has its `this` keyword
 var foo = {
     x: 3
 }
+
 var bar = function(){
     console.log(this.x);
 }
+
 bar(); // undefined
+
 var boundFunc = bar.bind(foo);
+
 boundFunc(); // 3
 ```
 
@@ -926,6 +953,12 @@ AddPirateForm:
     this.props.addPirate(pirate);
   }
 ```
+
+
+
+
+
+
 
 # STOP HERE - move to session-10 for better notes
 
