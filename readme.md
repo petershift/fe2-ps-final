@@ -2,15 +2,17 @@
 
 ## Homework
 
-
+Add a form to the application which allows the creation of a new recipe.
 
 ## FoodApp
 
-Note
+Notes:
 
 Added apiUrl to data service
 
 Added imageUrl to recipe-detail component
+
+Correct the errors by removing the Elvis (`?`) operators and testing for the presence of the data with `*ngIf`:
 
 ```
 <div *ngIf="recipe">
@@ -269,10 +271,181 @@ Add Edit button to the template that sets the formEnables flag to true
 
 We will do this from the edit recipe page
 
+component 
+
+```
+  async deleteRecipe(){
+    const response = await this.dataService.deleteRecipe(this.recipe)
+    window.history.back();
+  }
+```
+
+service
+
+```
+  deleteRecipe(recipe){
+    return this.http.delete(`${this.apiUrl}${recipe._id}`).toPromise();
+  }
+```
+
 ## Adding a Recipe
 
 We will do this from the recipe list page.
 
+```
+<div *ngIf="add">
+    <div id="form-wrapper">
+      <form (submit)="addRecipe()">
+        <legend>Add Recipe</legend>
+        <ol>
+          <li>
+            <label for="name">Recipe Name</label>
+            <input 
+            value="{{ test }}"
+            minlength="3" 
+            type="text" 
+            name="name" 
+            required 
+            placeholder="Recipe Name" />
+          </li>
+          <li>
+            <label for="image">Image</label>
+            <input type="text" name="image" required placeholder="Image Name" />
+          </li>
+          <li>
+            <label for="description">Recipe Description</label> 
+            <textarea name="description" required></textarea>
+          </li>
+          <li>
+            <input type="submit" value="Add Recipe" />
+          </li>
+        </ol>
+      </form>
+    </div>
+  </div>
+
+  <button (click)="addOne()">Add Recipe</button>
+```
+
+```
+this.add = true;
+
+...
+
+addOne(){
+  this.add = true;
+}
+```
+
+One way communication
+
+In input:
+
+`value="{{ test }}"`
+
+In component:
+
+```
+title:string;
+this.title = 'test'
+```
+
+```
+addRecipe(){
+  console.log(this.title)
+}
+```
+
+Two way binding
+
+```
+<li>
+  <label for="name">Recipe Title</label>
+  <input 
+  [(ngModel)]="title"
+```
+
+and test
+
+Add footballs to all 3 inputs
+
+```
+addRecipe(){
+  console.log(this)
+}
+```
+
+
+
+## Adding a Navbar
+
+ng g component components/nav
+
+```
+<app-nav></app-nav>
+<div class="wrap">
+  <router-outlet></router-outlet>
+</div>
+```
+
+```
+<nav>
+  <h1>Yum Yum!</h1>
+  <ul>
+    <li><a href="" routerLink="">Home</a></li>
+    <li><a href="" routerLink="/recipes">Recipes</a></li>
+    <li><a href="" routerLink="/reviews">Reviews</a></li>
+    <li><a href="" routerLink="/delivery">Delivery</a></li>
+  </ul>
+</nav>
+```
+
+```
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent, pathMatch: "full"},
+  { path: 'recipes', component: RecipesComponent},
+  { path: 'recipe/:id', component: RecipeDetailComponent },
+  { path: 'reviews', component: ReviewsComponent },
+  { path: 'delivery', component: DeliveryComponent }
+]
+```
+
+Rudimentary formatting
+
+```
+nav {
+  display: flex;
+  background: #000;
+  align-items: center;
+}
+nav h1 {
+   color: #fff; 
+   font-family: Lobster; 
+   white-space: nowrap;
+}
+nav ul {
+  width:100%;
+  display: flex;
+  list-style: none;
+  justify-content: space-around; 
+  font-family: Lobster;
+}
+nav il {
+
+}
+nav a {
+  padding: 0.5rem;
+  color: #fff;
+  background: var(--green)
+}
+```
+
+To use routerLink elsewhere in our app we need to bind the routerLink. E.g.:
+
+```
+<!-- <h2><a href="recipe/{{ recipe._id }}">{{ recipe.title }}</a></h2> -->
+<h2><a [routerLink]="['/recipe', recipe._id]">{{ recipe.title }}</a></h2>
+```
 
 
 
