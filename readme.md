@@ -555,7 +555,7 @@ $ sudo npm install -g create-react-app
 See also: [Create Angular App](https://cli.angular.io)
 
 ```
-$ sudo create-react-app react-pirates
+$ create-react-app react-pirates
 ```
 
 ```
@@ -585,10 +585,10 @@ Examine package.json
 What appears to be HTML is JSX.
 
 1. logo: {logo}: JSX
-2. App.css: injected via Webpack:`<style>`
-3. class → className: JSX
-4. xhtml style closing tags: JSX
-5. style="color: purple" → style={{color: 'purple'}}: JSX
+1. App.css: injected via Webpack:`<style>`
+1. class → className: JSX
+1. xhtml style closing tags: JSX
+1. style="color: purple" → style={{color: 'purple'}}: JSX
 
 Add outside the App div:
 
@@ -603,9 +603,10 @@ Comments:
 
 ## Additional Installs
 
-1. [React developer tools for Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-2. [Package Control: Babel](https://packagecontrol.io/packages/Babel)
+1. [React developer tools for Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en). Adds a tab to dev tools in Chrome (or Firefox).
+1. [Package Control: Babel](https://packagecontrol.io/packages/Babel). For syntax highlighting. An Atom react package is available.
 
+Use `JavaScript(Babel)` as your highlighter in Sublime test.
 
 App.js:
 
