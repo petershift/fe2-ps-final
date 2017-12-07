@@ -375,7 +375,7 @@ Here is a starter form for use. Note the `value="{{ test }}"`
 
 ```html
 <div *ngIf="add">
-    <div id="form-wrapper">
+    <div class="form-wrapper">
       <form (submit)="addRecipe()">
         <legend>Add Recipe</legend>
         <ol>
@@ -423,12 +423,16 @@ One way communication
 
 In input:
 
-`value="{{ test }}"`
+`value="{{ title }}"`
 
 In component:
 
 ```js
 title:string;
+
+...
+
+
 this.title = 'test'
 ```
 
@@ -438,26 +442,30 @@ addRecipe(){
 }
 ```
 
-Two way binding
+Add two way binding
 
-```
+```html
 <li>
   <label for="name">Recipe Title</label>
   <input 
   [(ngModel)]="title"
+
+  ...
+
+</li>
 ```
 
-and test
+and test.
 
-Add footballs to all 3 inputs
+Add footballs to all 3 inputs, then try consoling:
 
-```
+```js
 addRecipe(){
   console.log(this)
 }
 ```
 
-
+See homework assignment above.
 
 ## Adding a Navbar
 
@@ -528,6 +536,583 @@ To use routerLink elsewhere in our app we need to bind the routerLink. E.g.:
 <!-- <h2><a href="recipe/{{ recipe._id }}">{{ recipe.title }}</a></h2> -->
 <h2><a [routerLink]="['/recipe', recipe._id]">{{ recipe.title }}</a></h2>
 ```
+
+
+
+
+
+
+
+
+# React
+
+## React Classes
+
+```
+$ sudo npm install -g create-react-app
+```
+
+See also: [Create Angular App](https://cli.angular.io)
+
+```
+$ sudo create-react-app react-pirates
+```
+
+```
+$ cd react-pirates
+```
+
+```
+npm run start
+```
+
+Danger- do not do this! Demo only! 
+
+```
+> git init
+> git add .
+> git commit -m 'testing'
+> git branch ejected
+> git checkout ejected
+> npm run eject
+> git status
+```
+
+Examine package.json
+
+### App.js
+
+What appears to be HTML is JSX.
+
+1. logo: {logo}: JSX
+2. App.css: injected via Webpack:`<style>`
+3. class → className: JSX
+4. xhtml style closing tags: JSX
+5. style="color: purple" → style={{color: 'purple'}}: JSX
+
+Add outside the App div:
+
+`<p>test</p>`
+
+Note - to use Emmet run - `ctrl-e`
+
+Comments:
+
+`{ /* comment */ }` see http://wesbos.com/react-jsx-comments/
+
+
+## Additional Installs
+
+1. [React developer tools for Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+2. [Package Control: Babel](https://packagecontrol.io/packages/Babel)
+
+
+App.js:
+
+`import logo from './anchor.svg';`
+
+`<h2>Pirate List</h2>`
+
+App.css:
+
+```
+.App-header {
+  background-color: #eee;
+  height: 150px;
+  padding: 20px;
+  color: #333;
+}
+```
+
+### Components
+
+Pirate.js
+
+```
+import React, { Component } from 'react';
+
+class Pirate extends React.Component {
+  render(){
+    return (
+      <p>Pirate Component</p>
+      )
+  }
+}
+
+export default Pirate;
+```
+
+App.js
+
+```
+import Pirate from './Pirate';
+```
+
+```
+<Pirate tagline="Ahoy there Matey!" />
+```
+
+Pirate.js
+
+```
+<p>{this.props.tagline}</p>
+```
+
+Inspect using React tool.
+
+#### React dev tools
+
+`$0`
+
+`$r`
+
+Select <Pirate />
+
+`$r.props`
+
+Exercise - creating another component
+
+```
+import React, { Component } from 'react';
+import logo from './anchor.svg';
+
+class Header extends React.Component {
+  render(){
+    return (
+      <div className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h2>Pirate List</h2>
+      </div>)
+    }
+  }
+
+export default Header;
+```
+
+`import Header from './Header';`
+
+## Adding Pirates
+
+New component: PirateForm.js:
+
+`import samplePirates from './sample-pirates';`
+
+```
+import React, { Component } from 'react';
+import AddPirateForm from './AddPirateForm';
+
+class PirateForm extends React.Component {
+  render(){
+    return (
+      <div>
+      <h3>Pirate Forms</h3>
+      <AddPirateForm />
+      </div>
+      )
+  }
+}
+
+export default PirateForm;
+```
+
+App.js
+
+```
+import PirateForm from './PirateForm';
+```
+
+State / Data binding
+
+AddPirateForm.js
+
+```
+import React, { Component } from 'react';
+
+class AddPirateForm extends React.Component {
+  render(){
+    return (
+      <form>
+      <input type="text" placeholder="Pirate name" />
+      <input type="text" placeholder="Pirate vessel" />
+      <input type="text" placeholder="Pirate weapon" />
+      <button type="submit">Add Pirate</button>
+      </form>
+      )
+  }
+}
+
+export default AddPirateForm;
+```
+
+Method - createPirate
+
+`<form onSubmit={(e) => this.createPirate(e)}>`:
+
+```
+    return (
+      <form onSubmit={(e) => this.createPirate(e)}>
+      <input type="text" placeholder="Pirate name" />
+      <input type="text" placeholder="Pirate vessel" />
+      <input type="text" placeholder="Pirate weapon" />
+      <button type="submit">Add Pirate</button>
+      </form>
+      )
+```
+
+In AddPirateForm (above render:
+
+```
+createPirate(event) {
+  event.preventDefault();
+  console.log('make a pirate')
+}
+```
+
+Test
+
+Add refs to the form to store references to the input:
+
+```
+<form onSubmit={(e) => this.createPirate(e)}>
+<input ref={(input) => this.name = input } type="text" placeholder="Pirate name" />
+<input ref={(input) => this.vessel = input } type="text" placeholder="Pirate vessel" />
+<input ref={(input) => this.weapon = input } type="text" placeholder="Pirate weapon" />
+<button type="submit">Add Pirate</button>
+</form>
+```
+
+Go to React dev tools, find AddPirateForm component, $r in the console to see the inputs.
+
+Create the pirate const variable
+
+AddPirateForm:
+
+```
+  createPirate(event) {
+    event.preventDefault();
+    console.log('make a pirate');
+    const pirate = {
+      name: this.name.value,
+      vessel: this.vessel.value,
+      weapon: this.weapon.value,
+    }
+    console.log(pirate)
+  }
+```
+
+Test.
+
+Get the pirate object into state. 
+
+The key difference between props and state is that state is internal and controlled by the component itself while props are external and controlled by whatever renders the component. - [ref](http://buildwithreact.com/tutorial/state)
+
+App.js:
+
+```
+class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      pirates: {}
+    }
+  }
+```
+
+React tools, find App, view state.
+
+App.js:
+
+```
+  addPirate(pirate){
+    //update state
+    const pirates = {...this.state.pirates}
+    //add new pirate
+    const timestamp = Date.now();
+    pirates[`pirate-${timestamp}`] = pirate;
+    //set state
+    this.setState({ pirates: pirates })
+  }
+```
+
+Bind the add form to our app.
+
+App.js:
+
+```
+  constructor() {
+    super();
+    this.addPirate = this.addPirate.bind(this);
+    this.state = {
+      pirates: {}
+    }
+  }
+```
+
+note - bind() - creates a new function that, when called, has its `this` keyword set to the provided value.
+
+```
+var foo = {
+    x: 3
+}
+var bar = function(){
+    console.log(this.x);
+}
+bar(); // undefined
+var boundFunc = bar.bind(foo);
+boundFunc(); // 3
+```
+
+Test with: 
+
+$r.addPirate({name: 'joe'})
+
+Make the addPirate function available to components with props.
+
+Pass the prop down to PirateForm:
+
+`<PirateForm addPirate={this.addPirate} />`:  
+
+```
+return (
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Pirate List</h2>
+        </div>
+        <ul>
+          <Pirate />
+        </ul>
+        <PirateForm addPirate={this.addPirate} />
+      </div>
+    );
+```
+
+Examine PirateForm props
+
+Only one level more! Pass the prop to AddPirateForm.
+
+PirateForm:
+
+`<AddPirateForm addPirate={this.props.addPirate} />`:
+
+```
+  render(){
+    return (
+      <div>
+      <h3>Pirate Forms</h3>
+      <AddPirateForm addPirate={this.props.addPirate} />
+      </div>
+      )
+  }
+```
+
+Examine AddPirateForm props
+
+AddPirateForm:
+
+`this.props.addPirate(pirate);`
+
+```
+  createPirate(event) {
+    event.preventDefault();
+    console.log('make a pirate');
+    const pirate = {
+      name: this.name.value,
+      vessel: this.vessel.value,
+      weapon: this.weapon.value,
+    }
+    this.props.addPirate(pirate);
+  }
+```
+
+# STOP HERE - move to session-10 for better notes
+
+#### Use the form to add a pirate.
+
+Empty the form with a ref.
+
+`<form ref={(input)=>this.pirateForm = input } onSubmit={(e) => this.createPirate(e)}>`:
+
+```
+    return (
+      <form ref={(input)=>this.pirateForm = input } onSubmit={(e) => this.createPirate(e)}>
+      <input ref={(input) => this.name = input } type="text" placeholder="Pirate name" />
+      <input ref={(input) => this.vessel = input } type="text" placeholder="Pirate vessel" />
+      <input ref={(input) => this.weapon = input } type="text" placeholder="Pirate weapon" />
+      <button type="submit">Add Pirate</button>
+      </form>
+      )
+```
+
+and `this.pirateForm.reset();`:
+
+```
+createPirate(event) {
+    event.preventDefault();
+    console.log('make a pirate');
+    const pirate = {
+      name: this.name.value,
+      vessel: this.vessel.value,
+      weapon: this.weapon.value,
+    }
+    this.props.addPirate(pirate);
+    this.pirateForm.reset();
+  }
+```
+
+### Load sample data into state
+
+PirateForm:
+
+`<button onClick={this.loadSamples}>Load Sample Pirates</button>`:
+
+```
+    return (
+      <div>
+      <h3>Pirate Forms</h3>
+      <AddPirateForm addPirate={this.props.addPirate} />
+      <button onClick={this.props.loadSamples}>Load Sample Pirates</button>
+      </div>
+      )
+```
+
+App.js
+
+`import samplePirates from './sample-pirates'`
+
+```
+  loadSamples(){
+    this.setState({
+      pirates: samplePirates
+    })
+  }
+```
+
+```
+  constructor() {
+    super();
+    this.addPirate = this.addPirate.bind(this);
+    this.loadSamples = this.loadSamples.bind(this);
+    this.state = {
+      pirates: {}
+    }
+  }
+```
+
+
+`<PirateForm addPirate={this.addPirate} loadSamples={this.loadSamples} />`:
+
+```
+return (
+  <div className="App">
+    <div className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <h2>Pirate List</h2>
+    </div>
+    <ul>
+      <Pirate />
+    </ul>
+    <PirateForm addPirate={this.addPirate} loadSamples={this.loadSamples} />
+  </div>
+);
+```
+
+Loading the pirates
+
+App.js:
+
+```
+<ul>
+  <Pirate />
+</ul>
+```
+
+Pirate.js:
+
+```
+import React, { Component } from 'react';
+
+class Pirate extends React.Component {
+
+  render(){
+    return (
+      <li>
+        <p>Pirate</p>
+      </li>
+      )
+  }
+}
+
+export default Pirate;
+```
+
+Unlike Angular there are no built in loops, repeats etc. You must use regular JS.
+
+Here - cannot use .map which is for Arrays.
+
+Use `Object.keys()`
+
+Find App component in React tool. In console: `$r.state.pirates`
+
+Load samples and run again to see data. Can't loop over that!
+
+`Object.keys($r.state.pirates)`
+
+App.js:
+
+`{Object.keys(this.state.pirates)}`
+
+```
+return (
+  <div className="App">
+    <div className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <h2>Pirate List</h2>
+    </div>
+    <ul>
+    {Object.keys(this.state.pirates)}
+    </ul>
+    <PirateForm addPirate={this.addPirate} loadSamples={this.loadSamples} />
+  </div>
+);
+```
+
+```
+<ul>
+{
+  Object
+  .keys(this.state.pirates)
+  .map( key => <Pirate key={key} details={this.state.pirates[key]} /> )
+}
+</ul>
+```
+
+Pirate.js:
+
+```
+  render(){
+    const {details} = this.props;
+    return (
+      <li>
+        <h4>{details.name}</h4>
+        <p>{details.weapon}</p>
+        <p>{details.vessel}</p>
+      </li>
+      )
+  }
+```
+
+Load sample pirates.
+
+
+
+### Notes
+http://cmder.net
+cmd-e for Emmet expansion
+
+
+
 
 
 
