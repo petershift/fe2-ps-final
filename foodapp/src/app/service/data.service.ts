@@ -1,52 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Recipe } from '../models/Recipe';
 import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import 'rxjs/add/operator/toPromise';
+
+import { Recipe } from '../models/Recipe';
+
 @Injectable()
+  
 export class DataService {
 
-	recipe: Recipe;
-	recipes: Recipe[];
-	apiUrl: string;
+  recipes: Recipe[];
+  recipe: Recipe;
+  id: string;
 
-	constructor(private http: Http) {
-		this.apiUrl = 'http://localhost:3006/api/'
-	}
+  getRecipes() {
+    return this.http.get('http://localhost:3006/api/recipe').toPromise();
+  }
 
-	getRecipes(){
-		return this.http.get(`${this.apiUrl}recipe/`).toPromise();
-	}
+  getRecipe(id) {
+    return this.http.get('http://localhost:3006/api/recipe/' + id).toPromise()
+  }
 
-	getRecipe(id) {
-		return this.http.get(`${this.apiUrl}recipe/${id}`).toPromise()
-	}
+  constructor(private http: Http) {
+  }
+
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,15 @@
+@import '../../../sass/mixins';
+
+.recipe {
+  button {
+    background: var(--blue);
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border: 2px solid #fff;
+    border-radius: 3px;
+  }
+  img {
+    height: 100%;
+    @include photo-image;
+  }
+}

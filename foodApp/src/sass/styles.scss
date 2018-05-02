@@ -1,21 +1,20 @@
+@import 'variables';
 @import url("https://fonts.googleapis.com/css?family=Lobster");
+
 :root {
   --blue: #007eb6;
   --green: #3f504a;
   --break: 620px;
 }
-
 html {
   box-sizing: border-box;
   font-family: 'helvetica neue';
   font-size: 20px;
   font-weight: 200;
 }
-
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
 body {
   min-height: 100vh;
   margin: 0;
@@ -28,7 +27,6 @@ body {
   padding: 0.5rem;
   margin: 1rem auto;
 }
-
 h1,
 h2 {
   font-family: lobster;
@@ -40,36 +38,8 @@ ul {
   padding: 0;
 }
 
-.recipes li {
-  display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 620px) {
-  .recipes li {
-    flex-direction: row;
-    padding: 1rem;
-  }
-}
-
-.recipes li img {
+img {
   width: 100%;
-  height: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  margin-right: 1rem;
-  background-color: #fff;
-  box-shadow: 2px 2px 4px #ccc;
+  height: auto;
 }
 
-@media (min-width: 620px) {
-  .recipes li img {
-    width: 30%;
-  }
-}
-
-.recipes li a {
-  color: #7e360d;
-  text-decoration: none;
-}
-/*# sourceMappingURL=styles.css.map */
