@@ -28,13 +28,13 @@ Correct the errors we saw on the recipe-detail rendering by removing the Elvis (
 ```html
 <div *ngIf="recipe">
   <h1> {{ recipe.title }}</h1>
-  <img style="max-width: 30%" src="assets/home/{{ recipe.image }}" />
+  <img src="assets/home/{{ recipe.image }}" />
   <p>{{ recipe.description }}</p>
   <button (click)="back()">Back</button>
 </div>
 ```
 
-Importing the forms module in app.module:
+Import the forms module in `app.module`:
 
 ```js
 import { FormsModule } from '@angular/forms';
@@ -48,7 +48,7 @@ import { FormsModule } from '@angular/forms';
   ],
 ```
 
-## Binding
+<!-- ## Binding
 
 1: *html Binding  DOM > Component* works for any HTML attribute:
 
@@ -64,13 +64,13 @@ In Angular 2 `(click)` (was `ng-click` in Angular 1)
 
 In Angular 2 we use hotdogs (or a football in a box):
 
-`<input [(ngModel)]="name" />`
+`<input [(ngModel)]="name" />` -->
 
 ## ngIf condition
 
 We use *ngIf to toggle a form on the detail page which will allow us to edit a recipe.
 
-* recipe-detail.component
+* `recipe-detail.component`:
 
 ```js
 formEnabled: boolean;
@@ -85,12 +85,14 @@ formEnabled: boolean;
 <div *ngIf="!formEnabled">
   <div *ngIf="recipe">
     <h1> {{ recipe.title }}</h1>
-    <img style="max-width: 30%" src="assets/home/{{ recipe.image }}" />
+    <img src="assets/home/{{ recipe.image }}" />
     <p>{{ recipe.description }}</p>
     <button (click)="back()">Back</button>
   </div>
 </div>
 ```
+
+For two Way Binding between the DOM < > Component (e.g. `ng-model` in Angular 1) we use hotdogs (or a football in a box): `[(ngModel)]="recipe.title"`
 
 ```html
 <div *ngIf="formEnabled">
@@ -124,17 +126,9 @@ formEnabled: boolean;
 </div>
 ```
 
-Test two way binding by adding this to the form:
-
-`<p>{{ recipe.title }}</p>`
-
 ### Form CSS
 
-For SASS
-
-Create a sass directory in src and styles.scss within.
-
-* .angular-cli.json
+Note `.angular-cli.json`
 
 ```js
 "styles": [
@@ -142,58 +136,72 @@ Create a sass directory in src and styles.scss within.
 ],
 ```
 
-See [this article](https://scotch.io/tutorials/using-sass-with-the-angular-cli) for additional settings.
+Create `_forms.scss` in the sass directory and import it into `styles.scss`.
 
-* basics
+Add to the styles.scss:
 
 ```css
-  form {
-    max-width:620px;
-    margin: 20px auto;
-  }
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+```
 
+See [this article](https://scotch.io/tutorials/using-sass-with-the-angular-cli) for additional settings.
+
+```css
+form {
+  margin: 1rem;
   ol {
     list-style: none;
     padding: 0;
   }
+  li {
+    margin-bottom: 1rem;
+  }
   li, label {
-    display: block; /* was display:flex;*/
+    display: block;
   }
   fieldset {
     border:none;
+    margin: 0;
+    padding: 0;
   }
   legend {
-    font-size:24px;
-    margin-bottom:20px;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  label {
+    font-size: 0.875rem;
   }
   input,
   textarea {
-    border:1px solid #ccc;
-    font-size:20px;
-    min-width:480px;
-    min-height:30px;
-    display:block;
-    margin-bottom:16px;
-    margin-top:8px;
-    border-radius:5px;
+    font-weight: 300;
+    border: 2px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+    min-height: 30px;
+    display: block;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 3px;
     transition: all 0.5s ease-in-out;
   }
   textarea {
     min-height:100px;
   }
+}
 ```
 
-* focus
+Focus styles:
 
 ```css
 *:focus{
   outline: none;
+  border-color: #007eb6;
 }
 
 input:focus,
 textarea:focus {
   box-shadow: 0 0 25px #ccc;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 input:not(:focus),
@@ -202,57 +210,54 @@ textarea:not(:focus) {
 }
 ```
 
+Move the button styles from the `recipe.detail` sass file into the new `_forms` styles.
+
+```css
+button {
+  background: var(--blue);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+```
+
+And set the input field to a button:
+
+```html
+<li>
+  <button type="submit" >Update Recipe</button>
+</li>
+```
+
 Native browser validation
 
 * novalidate
 * required, valid, invalid
 
+Add the 3 form images from assets and:
+
 ```css
 input:required,
 textarea:required {
-  background:url("/assets/asterisk_orange.png") no-repeat 280px 7px;
+  background: #fff url("/assets/asterisk_orange.png") no-repeat right top;
 }
 
 input:valid,
 textarea:valid {
-  background:url("/assets/tick.png") no-repeat 280px 5px;
+  background: #fff url("/assets/tick.png") no-repeat right top;
 }
 
 input:focus:invalid,
 textarea:focus:invalid {
-  background:url("/assets/cancel.png") no-repeat 280px 7px;
+  background: #fff url("/assets/cancel.png") no-repeat right top;
 }
 ```
 
-Input types
+Turn off the native browser validation by adding `novalidate` to the form tag.
 
-* text, email, website, number, range
-
-```css
-input[type=submit] {
-  color: #fff;
-  padding: 10px;
-  background: #007eb6;
-  opacity: 1.0;
-}
-
-input[type="number"],
-input[type="number"]:required,
-input[type="number"]:valid,
-input[type="number"]:focus:invalid {
-  background-position: 260px 7px;
-}
-```
-
-Placeholder text
-
-```css
-::-webkit-input-placeholder {
-   color: #aaa;
-}
-```
-
-Add rudimentary feedback:
+Add rudimentary Angular validation for *one* of the fields:
 
 ```html
 <li>
@@ -267,21 +272,27 @@ Add rudimentary feedback:
   required
   placeholder="Recipe Name" />
 
-  <div *ngIf="recipeTitle.errors?.required && recipeTitle.touched" class="alert">Title is required</div>
-  <div *ngIf="recipeTitle.errors?.minlength && recipeTitle.touched" class="alert">Recipe title should be longer</div>
-
+  <div *ngIf="recipeTitle.errors?.required && recipeTitle.touched" class="alert">A recipe title is required.</div>
+  <div *ngIf="recipeTitle.errors?.minlength && recipeTitle.touched" class="alert">The recipe title should be longer.</div>
 </li>
-
-
 ```
 
-* recipe-detail.component html template
+And:
+
+```css
+.alert {
+  color: red;
+  font-size: 0.875rem;
+}
+```
+
+* `recipe-detail.component` html template:
 
 ```html
-<form (submit)="editRecipe()">
+<form (submit)="editRecipe()" novalidate>
 ```
 
-* recipe-detail.component
+* `recipe-detail.component`:
 
 ```js
 editRecipe(){
@@ -289,7 +300,7 @@ editRecipe(){
 }
 ```
 
-async, await:
+Use async, await:
 
 ```js
 async editRecipe(){
@@ -298,15 +309,7 @@ async editRecipe(){
 }
 ```
 
-* data.service
-
-```js
-putRecipe(){
-  console.log('service ' + this.recipe)
-}
-```
-
-then
+* `data.service`:
 
 ```js
 putRecipe(recipe) {
@@ -315,11 +318,11 @@ putRecipe(recipe) {
 }
 ```
 
-Note the error in the console.
+Note the any errors in the console.
 
-Add access control headers for our http verbs.
+Check the access control headers for our http verbs.
 
-* app.js
+* `app.js`:
 
 ```js
 app.use((req, res, next) => {
@@ -332,19 +335,18 @@ app.use((req, res, next) => {
 
 Set the `formEnabled` flag component.
 
-* recipe-detail.component:
+* `recipe-detail.component`:
 
 ```js
 async editRecipe(){
-  console.log(this.recipe)
   const response = await this.dataService.putRecipe(this.recipe)
   this.formEnabled = false;
 }
 ```
 
-Add a Cancel button to the form that sets the formEnables flag to false
+Add a Cancel button to the form that sets the formEnabled flag to false.
 
-Add Edit button to the template that sets the formEnables flag to true
+Add Edit button to the template that sets the formEnables flag to true.
 
 ## Deleting a Recipe
 
@@ -352,7 +354,7 @@ We will do this from the edit recipe page.
 
 Add a delete button.
 
-* recipe-detail.component
+* `recipe-detail.component`:
 
 ```js
 async deleteRecipe(){
@@ -361,11 +363,11 @@ async deleteRecipe(){
 }
 ```
 
-* data.service
+* `data.service`:
 
 ```js
 deleteRecipe(recipe){
-  return this.http.delete(`${this.apiUrl}recipe/${recipe._id}`).toPromise();
+  return this.http.delete('http://localhost:3006/api/recipe/' + recipe._id).toPromise();
 }
 ```
 
@@ -373,44 +375,55 @@ deleteRecipe(recipe){
 
 I suggest adding a recipe from the recipe list page.
 
-Here is a starter form for use. Note the `value="{{ test }}"`
+Here is a starter form for use.
 
 ```html
 <div *ngIf="add">
-    <div class="form-wrapper">
-      <form (submit)="addRecipe()">
-        <legend>Add Recipe</legend>
-        <ol>
-          <li>
-            <label for="name">Recipe Name</label>
-            <input
-            value="{{ test }}"
-            minlength="3"
-            type="text"
-            name="name"
-            required
-            placeholder="Recipe Name" />
-          </li>
-          <li>
-            <label for="image">Image</label>
-            <input type="text" name="image" required placeholder="Image Name" />
-          </li>
-          <li>
-            <label for="description">Recipe Description</label>
-            <textarea name="description" required></textarea>
-          </li>
-          <li>
-            <input type="submit" value="Add Recipe" />
-          </li>
-        </ol>
-      </form>
-    </div>
+  <div class="form-wrapper">
+    <form>
+    <legend>Add Recipe</legend>
+      <ol>
+        <li>
+          <label for="title">Recipe Name</label>
+          <input
+          ngModel
+          minlength="3"
+          type="text"
+          name="title"
+          required
+          placeholder="Name" />
+        </li>
+        <li>
+          <label for="image">Image</label>
+          <input
+          type="text"
+          ngModel
+          name="image"
+          required
+          placeholder="Image Name" />
+        </li>
+        <li>
+          <label for="description">Recipe Description</label>
+          <textarea
+          ngModel
+          name="description"
+          required>
+          </textarea>
+        </li>
+        <li>
+          <button type="submit">Add Recipe</button>
+        </li>
+      </ol>
+    </form>
   </div>
+</div>
   <button (click)="addOne()">Add Recipe</button>
 
 ```
 
-Create a boolean that will display the form.
+Create and set a boolean that will display the form.
+
+`add: boolean = true;`
 
 ```js
 this.add = true;
@@ -430,20 +443,21 @@ Add submit, mgModel
     <legend>Add Recipe</legend>
       <ol>
         <li>
-          <label for="name">Recipe Name</label>
+          <label for="title">Recipe Name</label>
           <input
           ngModel
           minlength="3"
           type="text"
-          name="name"
+          name="title"
           required
           placeholder="Name" />
         </li>
         <li>
           <label for="image">Image</label>
-          <input type="text"
+          <input
+          type="text"
           ngModel
-          name="image" r
+          name="image"
           required
           placeholder="Image Name" />
         </li>
@@ -456,7 +470,7 @@ Add submit, mgModel
           </textarea>
         </li>
         <li>
-          <input type="submit" value="Add Recipe" />
+          <button type="submit">Add Recipe</button>
         </li>
       </ol>
     </form>
