@@ -628,8 +628,6 @@ To use routerLink elsewhere in our app we need to bind the routerLink. E.g.:
 sudo npm install -g create-react-app
 ```
 
-See also: [Create Angular App](https://cli.angular.io)
-
 ```sh
 create-react-app react-pirates
 ```
@@ -637,6 +635,8 @@ create-react-app react-pirates
 ```sh
 cd react-pirates
 ```
+
+Examine `package.json`
 
 ```sh
 npm run start
@@ -654,7 +654,7 @@ Danger- do not do this! Demo only!
 > git status
 ```
 
-Examine package.json
+Examine `package.json`
 
 ### App.js
 
@@ -670,7 +670,7 @@ In addition, React components must only return a SINGLE JSX node at its root, so
 1. xhtml style closing tags: JSX
 1. style="color: purple" → style={{color: 'purple'}}: JSX
 
-Add outside the App div:
+Add outside the App div to see a common error:
 
 `<p>test</p>`
 
@@ -683,11 +683,11 @@ Comments:
 ## Additional Installs
 
 1. [React developer tools for Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en). Adds a tab to dev tools in Chrome (or Firefox).
-1. [Package Control: Babel](https://packagecontrol.io/packages/Babel). For syntax highlighting. An Atom react package is available.
+1. If you are using Sublime text use Babel - [Package Control: Babel](https://packagecontrol.io/packages/Babel)for syntax highlighting. An Atom react package is also available. Use `JavaScript(Babel)` as your highlighter in Sublime test.
 
-Use `JavaScript(Babel)` as your highlighter in Sublime test.
+* `app.js`:
 
-* app.js
+Use a more appropraite image (from the React assets).
 
 `import logo from './anchor.svg';`
 
@@ -728,23 +728,19 @@ class Pirate extends React.Component {
 export default Pirate;
 ```
 
-* App.js
+* App.js:
 
 ```js
 import Pirate from './Pirate';
 ```
 
+Load the new component in `App.js`:
+
 ```js
 <Pirate tagline="Ahoy there Matey!" />
 ```
 
-* Pirate.js
-
-```html
-<p>{this.props.tagline}</p>
-```
-
-e.g.
+* `Pirate.js`:
 
 ```html
 <div>
@@ -753,13 +749,13 @@ e.g.
 </div>
 ```
 
-Inspect using React tool.
+Inspect using React tool. Find the Pirate component and notice the `props` entry.
 
 #### React dev tools
 
-`$0` - selects the element, a standard feature in the console
+`$0` - selects the element - a standard feature in the console
 
-`$r` - the react equivalent
+`$r` - is the react equivalent
 
 Select `<Pirate />`
 
@@ -767,7 +763,7 @@ Select `<Pirate />`
 
 Try on *Instagram* or Facebook - two sites that use React. Find a component that has Object as its prototype.
 
-Exercise - create another component
+Exercise - create another component - `Header.js`:
 
 ```js
 import React, { Component } from 'react';
@@ -786,15 +782,17 @@ class Header extends React.Component {
 export default Header;
 ```
 
-* App.js
+* `App.js`:
 
 `import Header from './Header';`
 
 `<Header />`
 
+Breaking out chunks of code into additional components is a very common practice.
+
 ## Adding Pirates
 
-New component: PirateForm.js:
+New component: `PirateForm.js`:
 
 `import samplePirates from './sample-pirates';`
 
