@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Recipe = mongoose.model('Recipe');
+
  
 exports.findAll = function (req, res) {
     Recipe.find({}, function (err, results) {

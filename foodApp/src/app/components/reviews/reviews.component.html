@@ -1,0 +1,88 @@
+<!--
+<div class="reviews">
+  <h1>{{ pageTitle }}</h1>
+  <img src="assets/home/napaValleyHarvest.jpg" />
+  
+  <ul>
+    <li *ngFor="let review of reviews">
+      <img src="assets/home/{{review.image}}" />
+      <div>
+        <h2>
+          <p>{{recipe.title}}</p>
+        </h2>
+        <p>{{review.description}}</p>
+      </div>
+    </li>
+  </ul> 
+</div>-->
+
+<div class="reviews">
+  <h1>{{ pageTitle }}</h1>
+
+  <ul>
+    <li *ngFor="let review of reviews">
+      
+      <img src="assets/home/{{review.image}}" />
+      
+     
+      <div class="reviews">
+        <h2>
+          <a href="/review/{{ review._id }}">{{review.title}}</a>
+        </h2>
+        <h3>{{review.date}}</h3>
+        <p>{{review.description}}</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="add">
+    <div class="form-wrapper">
+      <form (ngSubmit)="addReview(f)" #f="ngForm">
+      <legend>Add Event</legend>
+        <ol>
+          <li>
+            <label for="title">Event Name</label>
+            <input
+            ngModel
+            minlength="3"
+            type="text"
+            name="title"
+            required
+            placeholder="Name" />
+          </li>
+          <li>
+            <label for="image">Image</label>
+            <input
+            type="text"
+            ngModel
+            name="image"
+            required
+            placeholder="Image Name" />
+          </li>
+          <li>
+              <label for="date">Date</label>
+              <input
+              type="text"
+              ngModel
+              name="date"
+              required
+              placeholder="date" />
+          </li>
+          <li>
+            <label for="description">Event Description</label>
+            <textarea
+            ngModel
+            name="description"
+            required>
+            </textarea>
+          </li>
+         
+          <li>
+            <button type="submit">Submit</button>
+          </li>
+        </ol>
+      </form>
+    </div>
+  </div>
+  <button (click)="addOne()">Add Event</button>

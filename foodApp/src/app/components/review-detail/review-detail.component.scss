@@ -1,0 +1,63 @@
+@import '../../../sass/mixins';
+@import '../../../sass/variables';
+body{
+    margin-left: 40px;
+    background-color: whitesmoke;
+}
+
+.review {
+  
+  img {
+    height: 100%;
+    @include photo-image;
+  }
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+    margin-left: 45px;
+    @media (min-width: $breakone){
+      flex-direction: row;
+      padding: 1rem;
+    }
+  }
+  
+  li img {
+    @include photo-image;
+    height: 100%;
+    @media (min-width: $breakone){
+      width: 80%;
+      
+      
+    }
+  }
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+  }
+  
+  /* Create four equal columns that sits next to each other */
+  .column-left {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 8px;
+    background-color: #484848;
+    color: whitesmoke;
+    margin-left: 60px;
+    @media (max-width: 500px){
+        display: none;
+        
+      }
+   
+  }
+
+  .column-right {
+    flex: 52%;
+    max-width: 52%;
+    padding: 0px 8px;
+   
+    
+  }

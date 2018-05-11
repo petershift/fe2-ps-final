@@ -1,0 +1,25 @@
+nav {
+  display: flex;
+  background: #212F3C;
+  align-items: center;
+}
+nav h1 {
+   color: #fff;
+   font-family: Lobster;
+   white-space: nowrap;
+}
+nav ul {
+  width:100%;
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  font-family: Lobster;
+}
+nav il {
+
+}
+nav a {
+  padding: 0.5rem;
+  color: #fff;
+  background: var(--green)
+}

@@ -3,7 +3,8 @@ const app = express();
 const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose');
-const mongoUri = 'mongodb://devereld:dd2345@ds015730.mlab.com:15730/recipes-dd';
+//const mongoUri = 'mongodb://devereld:dd2345@ds015730.mlab.com:15730/recipes-dd';
+const mongoUri = 'mongodb://petershift:a1spencal@ds237989.mlab.com:37989/bcl'
 mongoose.connect(mongoUri, { useMongoClient: true } );
 
 // make sure this line always appears before any routes
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 })
 
 const recipeModels = require('./src/recipe.model'); 
+const reviewModels = require('./src/review.model'); 
 
 const routes = require('./src/recipe.routes');
 const appRoutes = routes(app);

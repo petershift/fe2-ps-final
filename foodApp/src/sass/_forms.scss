@@ -1,0 +1,71 @@
+form {
+    margin: 1rem;
+    ol {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 1rem;
+    }
+    li, label {
+      display: block;
+    }
+    fieldset {
+      border:none;
+      margin: 0;
+      padding: 0;
+    }
+    legend {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    label {
+      font-size: 0.875rem;
+    }
+    input,
+    textarea {
+      font-weight: 300;
+      border: 2px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+      min-height: 30px;
+      display: block;
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+      border-radius: 3px;
+      transition: all 0.5s ease-in-out;
+    }
+    textarea {
+      min-height:100px;
+    }
+  }
+
+  *:focus{
+    outline: none;
+    border-color: #007eb6;
+  }
+  
+  input:focus,
+  textarea:focus {
+    box-shadow: 0 0 25px #ccc;
+    transform: scale(1.02);
+  }
+  
+  input:not(:focus),
+  textarea:not(:focus) {
+    opacity: 0.5;
+  }
+
+  button {
+    background: var(--blue);
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #fff;
+    border-radius: 3px;
+    font-size: 0.75rem;
+  }
+
+  .alert {
+    color: red;
+    font-size: 0.875rem;
+  }

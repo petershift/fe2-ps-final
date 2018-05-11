@@ -1,0 +1,100 @@
+<!--
+<div  class="recipe">
+  <h1>{{ recipe?.title }}</h1>
+  <img src="assets/home/{{recipe?.image}}" />
+  <p>{{ recipe?.description }}</p>
+  <button (click)="back()">Back</button>
+</div>-->
+
+<!--
+ <div class="row"> 
+        <div class="column-left">
+        </div>
+        <div class="column-right">
+       </div>
+</div>
+
+-->
+<body>
+<div *ngIf="formEnabled" class="review">
+  <div *ngIf="review">
+    <h1> {{ review.title }} </h1>
+    <li>
+    <img src="assets/home/{{ review.image }}" /> </li>
+    <div class="row"> 
+      <div class="column-left">
+          <p>{{ review.date }}</p>
+          <p>MEMBER BENEFITS</p>
+          <p>    By Invitation Only®</p>
+          <br/><br/><br/>
+          <p>800 321 7786</p>
+      </div>
+      <div class="column-right">
+          <p>{{ review.description }}</p>
+          <h4>TERMS & DISCLAIMERS</h4>
+          <p>Transportation and accommodation costs are additional unless otherwise stated. 
+            The price indicated covers event costs only. All sales are final and non-refundable, 
+            and resale is prohibited. Payment must be made using an eligible American Express® Card. 
+            Details and prices are subject to change. Packages are available on a first-come, 
+            first-served basis. Availability is limited. Must be 21 years of age or older to consume 
+            alcoholic beverages. Please drink responsibly.</p>
+     </div>
+</div>
+    <!--<p>{{ review.description }}</p>-->
+    <br/>
+    <button (click)="back()">Back</button>
+    <button (click)="toggleForm()">Edit</button>
+  </div>
+</div>
+
+<div *ngIf="!formEnabled">
+  <div *ngIf="review">
+    <div class="form-wrapper">
+      <!--<form action="#" method="post" >-->
+      <form (submit)="editReview()" novalidate>  
+        
+        <fieldset>
+          
+          <!--<legend>Edit Recipe</legend>-->
+          <ol>
+            <!--
+            <li>
+              <label for="name">Recipe Title</label>
+              <input [(ngModel)]="recipe.title" type="text" name="name" required placeholder="Recipe Name" />
+            </li>-->
+            <li>
+                <label for="name">Event Name</label>
+              
+                <input
+                [(ngModel)]="review.title"
+                #reviewTitle="ngModel"
+                minlength="2"
+                type="text"
+                name="name"
+                required
+                placeholder="Review Name" />
+              
+                <div *ngIf="reviewTitle.errors?.required && reviewTitle.touched" class="alert">An event title is required.</div>
+                <div *ngIf="reviewTitle.errors?.minlength && reviewTitle.touched" class="alert">The event title should be longer.</div>
+              </li>
+            <li>
+              <label for="image">Image</label>
+              <input [(ngModel)]="review.image" type="text" name="image" required placeholder="Image Name" />
+            </li>
+            <li>
+              <label for="description">Event Description</label>
+              <textarea [(ngModel)]="review.description" name="description" required></textarea>
+            </li>
+            <li>
+              <button type="submit" >Update Event</button>
+            </li>
+          </ol>
+        </fieldset>
+      </form>
+    </div>
+    <button (click)="toggleForm()">Cancel</button>
+    <!--<button (click)="deleteRecipe()">Delete</button>-->
+  </div>
+</div>
+</body>
+

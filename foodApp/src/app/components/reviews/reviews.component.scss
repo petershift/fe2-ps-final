@@ -1,0 +1,27 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.reviews { 
+  li {
+    display: flex;
+    flex-direction: column;
+    @media (min-width: $breakone){
+      flex-direction: row;
+      padding: 1rem;
+    }
+  }
+  
+  li img {
+    @include photo-image;
+    height: 100%;
+
+    @media (min-width: $breakone){
+      width: 30%;
+    }
+  }
+  
+  li a {
+    color: #7e360d;
+    text-decoration: none;
+  }
+}
